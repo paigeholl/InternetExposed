@@ -33,7 +33,6 @@ DeviceInfo
 | where DeviceName == "queen-th-vm"
 | where IsInternetFacing == true
 | order by Timestamp desc
-
 ```
 
 The VM had been exposed for several days. **Last internet‑facing timestamp:** `2026-03-24T04:07:49Z`.
@@ -49,7 +48,6 @@ DeviceLogonEvents
 | where isnotempty(RemoteIP)
 | summarize Attempts = count() by ActionType, RemoteIP, DeviceName
 | order by Attempts
-
 ```
 
 Several external IPs were hammering the VM with failed login attempts --- classic brute‑force behavior.
@@ -63,7 +61,6 @@ DeviceLogonEvents
 | where LogonType has_any("Network", "Interactive", "RemoteInteractive", "Unlock")
 | where ActionType == "LogonSuccess"
 | where RemoteIP has_any(RemoteIPsInQuestion)
-
 ```
 
 **None** of the attacker IPs ever logged in successfully.
@@ -88,7 +85,6 @@ DeviceLogonEvents
 | where DeviceName == "queen-th-vm"
 | where LogonType == "Network"
 | where ActionType == "LogonSuccess"
-
 ```
 
 Everything looked normal.
@@ -102,7 +98,6 @@ DeviceLogonEvents
 | where LogonType == "Network"
 | where ActionType == "LogonSuccess"
 | distinct AccountName
-
 ```
 
 Only expected accounts showed up.
@@ -116,7 +111,6 @@ DeviceLogonEvents
 | where LogonType == "Network"
 | where ActionType == "LogonFailed"
 | where AccountName == "paige"
-
 ```
 
 No one tried to brute‑force my username. Attackers were just guessing common names.
@@ -140,7 +134,6 @@ DeviceLogonEvents
 | where ActionType == "LogonFailed"
 | where AccountName == "paige"
 | summarize count()
-
 ```
 
 My account had **zero** failed attempts.
@@ -155,7 +148,6 @@ DeviceLogonEvents
 | where ActionType == "LogonSuccess"
 | where AccountName == "paige"
 | summarize LoginCount = count() by DeviceName, ActionType, AccountName, RemoteIP
-
 ```
 
 All successful logons came from my desktop → Azure VM. Nothing suspicious.
@@ -176,7 +168,6 @@ T1110 -- Brute Force
 T1021 -- Remote Services
 T1589 -- Gather Victim Identity Information
 T1033 -- System Owner/User Discovery
-
 ```
 
 These line up with what I saw: scanning, brute‑force attempts, username guessing, and remote logon probing.
