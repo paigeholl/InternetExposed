@@ -27,7 +27,6 @@ These give me everything I need to check exposure, failed logons, successful log
 
 ### **Checking if the VM Was Internet‑Facing**
 
-kusto
 
 ```
 DeviceInfo
@@ -41,7 +40,6 @@ The VM had been exposed for several days. **Last internet‑facing timestamp:** 
 
 ### **Looking for Failed Logons**
 
-kusto
 
 ```
 DeviceLogonEvents
@@ -58,7 +56,6 @@ Several external IPs were hammering the VM with failed login attempts --- classi
 
 ### **Checking Whether Any of Those IPs Succeeded**
 
-kusto
 
 ```
 let RemoteIPsInQuestion = dynamic(["154.192.222.89","37.49.226.115","14.136.73.18","105.157.241.11"]);
@@ -85,7 +82,6 @@ DeviceLogonEvents
 
 ### **Reviewing All Successful Logons**
 
-kusto
 
 ```
 DeviceLogonEvents
@@ -99,7 +95,6 @@ Everything looked normal.
 
 ### **Checking Which Accounts Logged In**
 
-kusto
 
 ```
 DeviceLogonEvents
@@ -114,7 +109,6 @@ Only expected accounts showed up.
 
 ### **Checking Whether My Account Was Targeted**
 
-kusto
 
 ```
 DeviceLogonEvents
@@ -129,7 +123,6 @@ No one tried to brute‑force my username. Attackers were just guessing common n
 
 ### **Counting My Successful and Failed Logons**
 
-kusto
 
 ```
 // Successful
@@ -154,7 +147,6 @@ My account had **zero** failed attempts.
 
 ### **Checking Where My Successful Logons Came From**
 
-kusto
 
 ```
 DeviceLogonEvents
@@ -177,7 +169,6 @@ All successful logons came from my desktop → Azure VM. Nothing suspicious.
 
 ### **MITRE ATT&CK TTPs Identified**
 
-markdown
 
 ```
 T1595 -- Active Scanning
@@ -218,7 +209,6 @@ This reduces brute‑force risk and tightens access control.
 
 You can add screenshots by uploading them to your repo and referencing them like:
 
-markdown
 
 ```
 ![Screenshot](images/investigation.png)
