@@ -79,11 +79,8 @@ DeviceLogonEvents
 **Activity:** I checked for:
 
 -   Failed → then successful logons
-
 -   Suspicious usernames
-
 -   Suspicious source IPs
-
 -   Any abnormal login patterns
 
 ### **Reviewing All Successful Logons**
@@ -201,9 +198,7 @@ These line up with what I saw: scanning, brute‑force attempts, username guessi
 **Activity:** Since these VMs should never be exposed to the internet, the fix is straightforward:
 
 -   Add NSG inbound rules to only allow RDP from approved IPs
-
 -   Implement account lockout thresholds
-
 -   Add MFA for administrative access
 
 This reduces brute‑force risk and tightens access control.
@@ -216,13 +211,9 @@ This reduces brute‑force risk and tightens access control.
 **Activity:** This write‑up documents:
 
 -   What happened
-
 -   What I looked for
-
 -   What I found
-
 -   What I ruled out
-
 -   What actions were taken
 
 You can add screenshots by uploading them to your repo and referencing them like:
@@ -242,13 +233,8 @@ markdown
 **Activity:** A few things that would help prevent this in the future:
 
 -   Avoid exposing shared‑services VMs to the internet
-
 -   Use JIT (Just‑In‑Time) access
-
 -   Increase log retention
-
 -   Automate brute‑force detection alerts
-
 -   Standardize account lockout policies
-
 -   Regularly review NSG/firewall rules
