@@ -20,7 +20,6 @@ During routine maintenance, our team needed to check the shared‑services VMs (
 **Activity:** I focused on two tables:
 
 -   `DeviceInfo`
-
 -   `DeviceLogonEvents`
 
 These give me everything I need to check exposure, failed logons, successful logons, and where they came from.
@@ -49,6 +48,7 @@ DeviceLogonEvents
 | summarize Attempts = count() by ActionType, RemoteIP, DeviceName
 | order by Attempts
 ```
+<img width="855" height="206" alt="image" src="https://github.com/user-attachments/assets/9ce4da1c-24b9-4cc3-b783-1447ecbe0e6d" />
 
 Several external IPs were hammering the VM with failed login attempts --- classic brute‑force behavior.
 
@@ -62,6 +62,7 @@ DeviceLogonEvents
 | where ActionType == "LogonSuccess"
 | where RemoteIP has_any(RemoteIPsInQuestion)
 ```
+<img width="1236" height="429" alt="image" src="https://github.com/user-attachments/assets/34ce7776-4667-4e4c-ace9-576f73f7e767" />
 
 **None** of the attacker IPs ever logged in successfully.
 
@@ -149,6 +150,8 @@ DeviceLogonEvents
 | where AccountName == "paige"
 | summarize LoginCount = count() by DeviceName, ActionType, AccountName, RemoteIP
 ```
+<img width="877" height="142" alt="image" src="https://github.com/user-attachments/assets/6883f3f0-c62b-46ee-922e-c8b20ce56152" />
+
 
 All successful logons came from my desktop → Azure VM. Nothing suspicious.
 
@@ -198,13 +201,6 @@ This reduces brute‑force risk and tightens access control.
 -   What I ruled out
 -   What actions were taken
 
-You can add screenshots by uploading them to your repo and referencing them like:
-
-
-```
-![Screenshot](images/investigation.png)
-
-```
 
 **7\. Improvement**
 -------------------
